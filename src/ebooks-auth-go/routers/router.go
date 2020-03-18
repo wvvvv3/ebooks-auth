@@ -14,17 +14,28 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
-		beego.NSNamespace("/object",
-			beego.NSInclude(
-				&controllers.ObjectController{},
-			),
-		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+	// ns := beego.NewNamespace("/v1",
+	// 	beego.NSNamespace("/object",
+	// 		beego.NSInclude(
+	// 			&controllers.ObjectController{},
+	// 		),
+	// 	),
+	// 	beego.NSNamespace("/user",
+	// 		beego.NSInclude(
+	// 			&controllers.UserController{},
+	// 		),
+	// 	),
+	// 	// beego.NSNamespace("/student",
+	// 	// 	beego.NSInclude(
+	// 	// 		&controllers.StudentController{},
+	// 	// 	),
+	// 	// ),
+	// )
+	// beego.AddNamespace(ns)
+	beego.Router("/", &controllers.UserController{})
+	beego.Router("/ebook/student", &controllers.StudentController{})
+	beego.Router("/ebook/editors", &controllers.EbookEditorsController{})
+	beego.Router("/ebook/list", &controllers.EbookListController{})
+	beego.Router("/ebook/category", &controllers.EbookCategoryController{})
+	beego.Router("/ebook/msg", &controllers.EbookMsgController{})
 }
