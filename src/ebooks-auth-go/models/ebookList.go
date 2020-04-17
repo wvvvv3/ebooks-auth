@@ -1,6 +1,9 @@
 package models
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -12,8 +15,8 @@ type EbookList struct {
 	// `orm:"column(uid);pk"`
 }
 
+// 获取所有书单信息
 func GetAllEbookList() []*EbookList {
-	// fmt.Println("models is inited!mo")
 	o := orm.NewOrm()
 	o.Using("default")
 	var ebookList []*EbookList
@@ -21,6 +24,24 @@ func GetAllEbookList() []*EbookList {
 	q.All(&ebookList)
 	return ebookList
 
+}
+
+func GetEbookListById(id string) EbookList {
+	// string转换成int
+	v, errv := strconv.Atoi(id)
+	u := EbookList{Id: v}
+	o := orm.NewOrm()
+	o.Using("default")
+	err := o.Read(&u)
+	if err == orm.ErrNoRows {
+		fmt.Println("查询不到")
+	} else if err == orm.ErrMissPK {
+		fmt.Println("找不到主键")
+	}
+	if errv != nil {
+		fmt.Println("id获取错误")
+	}
+	return u
 }
 
 func init() {

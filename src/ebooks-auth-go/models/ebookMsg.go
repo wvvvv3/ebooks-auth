@@ -1,6 +1,9 @@
 package models
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -29,6 +32,24 @@ func GetAllEbookMsg() []*EbookMsg {
 	q.All(&ebookMsg)
 	return ebookMsg
 
+}
+
+func GetEbookMsgById(id string) EbookMsg {
+	// string转换成int
+	v, errv := strconv.Atoi(id)
+	u := EbookMsg{Id: v}
+	o := orm.NewOrm()
+	o.Using("default")
+	err := o.Read(&u)
+	if err == orm.ErrNoRows {
+		fmt.Println("查询不到")
+	} else if err == orm.ErrMissPK {
+		fmt.Println("找不到主键")
+	}
+	if errv != nil {
+		fmt.Println("id获取错误")
+	}
+	return u
 }
 
 func init() {

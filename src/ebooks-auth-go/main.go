@@ -10,7 +10,7 @@ import (
 
 func init() {
 	// 连接数据库
-	orm.RegisterDataBase("default", "mysql", "root:wei999@tcp(127.0.0.1:3306)/ebooks_mysql?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:wei934934@tcp(cdb-cw3mglxe.cd.tencentcdb.com:10127)/ebooks_vv?charset=utf8")
 	// 对数据库中user_msg表进行查询并显示
 	// fmt.Println("models is inited!")
 

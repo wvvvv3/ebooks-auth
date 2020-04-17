@@ -14,7 +14,7 @@ type EbookEditorsController struct {
 // @Description 返回所有的学生数据
 // @Success 200 {object} models.Student
 // @router / [get]
-func (u *EbookEditorsController) Get() {
+func (u *EbookEditorsController) GetAllEbookEditorsC() {
 	// fmt.Println("models is inited!co")
 	ss := models.GetAllEbookEditors()
 	u.Data["json"] = ss
