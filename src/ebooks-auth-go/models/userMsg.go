@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -61,7 +62,29 @@ func UserMsgUpdate(userMsg *UserMsg, userInfo *UserInfo) int64 {
 	}
 	return userMsg.Id
 }
+func UserMsgGetAll(userId string) (UserMsg, UserInfo) {
+	//获取orm对象
+	o := orm.NewOrm()
+	o.Using("default")
 
+	v, errv := strconv.ParseInt(userId, 10, 64)
+
+	//获取查询对象
+	var usermsg UserMsg
+	var userinfo UserInfo
+	// 查询
+	usermsg.Id = v
+	userinfo.Id = v
+
+	err := o.Read(&usermsg, "Id")
+	err2 := o.Read(&userinfo, "Id")
+
+	if err != nil || err2 != nil || errv != nil {
+		fmt.Println("error")
+	}
+
+	return usermsg, userinfo
+}
 func init() {
 	// 需要在init中注册定义的model
 	orm.RegisterModel(new(UserMsg))
